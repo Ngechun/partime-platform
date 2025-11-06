@@ -1,5 +1,5 @@
 /*
- * 完整的 styles.css 文件 (修正了语法错误和底部间距)
+ * 完整的 styles.css 文件 (恢复到基础版本，并修复了间距和语法错误)
  */
 
 /* ---------------------------------------------------- */
@@ -53,7 +53,7 @@ footer {
     color: #fff;
     text-align: center;
     padding: 20px 0;
-    margin-top: 40px;
+    margin-top: 40px; /* 增加底部间距 */
     font-size: 1em;
 }
 
@@ -64,18 +64,15 @@ main {
     padding: 20px;
     max-width: 1200px;
     margin: 0 auto; 
-    
-    /* ⭐ 修正底边距：确保主内容区与底部有足够空间 ⭐ */
-    padding-bottom: 50px; 
+    padding-bottom: 50px; /* 确保主内容区与底部有足够空间 */
 }
 
 .service-list {
     display: grid;
-    /* ... grid-template-columns 保持不变 ... */
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     
-    /* ⭐⭐ 关键修改：增大 gap 值，解决垂直粘连问题 ⭐⭐ */
-    gap: 40px; /* 从 30px 增大到 40px，增加水平和垂直间距 */
+    /* ⭐⭐ 修复垂直粘连问题：增大 grid 间距 ⭐⭐ */
+    gap: 40px; 
     
     margin-top: 20px;
 }
@@ -88,7 +85,7 @@ main {
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
     transition: transform 0.2s;
     
-    /* 修正按钮不对齐的关键代码 */
+    /* ⭐ 按钮底部对齐的关键代码 ⭐ */
     display: flex;
     flex-direction: column;
     height: 100%;
@@ -99,10 +96,11 @@ main {
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
 }
 
+/* ⭐ 按钮底部对齐的关键代码：让描述文字占据所有剩余空间 ⭐ */
 .service-card p {
-    flex-grow: 1; /* 强制 P 标签占据所有垂直可用空间 */
+    flex-grow: 1; 
     margin-bottom: 15px;
-    font-size: 1.1em; /* 确保段落文字大小一致 */
+    font-size: 1.1em;
 }
 
 /* ---------------------------------------------------- */
@@ -131,11 +129,11 @@ main {
 .search-container {
     margin: 30px 0;
     padding: 20px;
-    background-color: #e9ecef; /* 浅灰色背景突出搜索区域 */
+    background-color: #e9ecef;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 } 
-/* <-- 确保这个括号 '}' 存在且正确结束了上面的样式块！ */
+/* <-- 确保这里有正确的右大括号 }，这是之前语法错误可能发生的地方 */
 
 .search-container h3 {
     margin-top: 0;
@@ -156,5 +154,3 @@ main {
     border-color: #ff6600; 
     outline: none;
 }
-
-
