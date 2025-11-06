@@ -88,3 +88,4 @@ document.addEventListener('DOMContentLoaded', () => {
             container.innerHTML = '<h2 style="color: red;">抱歉，服务详情加载失败。请检查您的 Google Sheets 链接。</h2>';
         });
 });
+
