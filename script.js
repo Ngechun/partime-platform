@@ -1,17 +1,14 @@
 // script.js
 // 
 // ⚠️ 步骤 1：替换您的 Google Sheets CSV 链接 ⚠️
-// 请将 '您的 Google Sheets CSV 链接' 替换为您在 Google Sheets 中发布的 CSV 链接！
-const DATA_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQg5XACeP4fxy0ZY6fASBb6QJeiv9MFVL3GPzryhok_roTGzo4xlZclsiVDNkoRp3TNlZK8nXEo_jbL/pub?output=csv'; 
+const DATA_URL = '您的 Google Sheets CSV 链接'; 
 
 // ---------------------- 1. 获取重要元素 ----------------------
 const searchInput = document.getElementById('service-search');
 const servicesContainer = document.getElementById('services-container');
 
 // ---------------------- 2. CSV 解析函数 ----------------------
-// 确保能够正确解析包含 'id' 列的新数据结构
 function parseCSV(csvText) {
-    // 处理 CSV 文本，分割行和列
     const lines = csvText.trim().split('\n');
     // 预期标题: id, title, description, link
     const headers = lines[0].split(',').map(header => header.trim()); 
@@ -44,8 +41,7 @@ function createServiceCard(service) {
     descriptionElement.textContent = service.description;
 
     const linkElement = document.createElement('a');
-    // ⭐ 关键修改：将链接指向 detail.html，并使用 service.id 作为 URL 参数 ⭐
-    // 格式将是：detail.html?id=plumbing (例如)
+    // ⭐ 链接到详情页，并携带服务的唯一 ID ⭐
     linkElement.href = `detail.html?id=${service.id}`; 
     linkElement.className = 'btn';
     linkElement.textContent = '查看服务人员';
@@ -109,4 +105,3 @@ function filterServices() {
 // ---------------------- 6. 初始化 ----------------------
 document.addEventListener('DOMContentLoaded', loadAndRenderServices);
 searchInput.addEventListener('input', filterServices); // 实时过滤
-
