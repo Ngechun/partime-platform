@@ -1,7 +1,7 @@
 // detail.js (恢复到仅显示基础详情的版本)
 //
 // ⚠️ 替换您的 Google Sheets CSV 链接 ⚠️
-const DATA_URL = '您的 Google Sheets CSV 链接'; 
+const DATA_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQg5XACeP4fxy0ZY6fASBb6QJeiv9MFVL3GPzryhok_roTGzo4xlZclsiVDNkoRp3TNlZK8nXEo_jbL/pub?output=csv'; 
 
 // ---------------------- CSV 解析函数 (确保独立运行) ----------------------
 function parseCSV(csvText) {
@@ -87,3 +87,4 @@ document.addEventListener('DOMContentLoaded', () => {
             container.innerHTML = '<h2 style="color: red;">抱歉，服务详情加载失败。请检查您的 Google Sheets 链接。</h2>';
         });
 });
+
