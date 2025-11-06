@@ -69,10 +69,16 @@ main {
     padding-bottom: 50px; 
 }
 
-.service-list {
+service-list {
     display: grid;
+    /* 在宽屏幕上显示两列，窄屏幕上显示一列 */
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 30px; /* 卡片之间的间距 */
+    
+    /* ⭐⭐ 关键修改：增加垂直间距 (Row-Gap) ⭐⭐ */
+    /* 我们将行间距和列间距都设置为 30px，以确保水平和垂直都有足够的空间 */
+    gap: 30px; 
+    /* 或者明确设置：row-gap: 30px; column-gap: 30px; */
+    
     margin-top: 20px;
 }
 
@@ -152,3 +158,4 @@ main {
     border-color: #ff6600; 
     outline: none;
 }
+
