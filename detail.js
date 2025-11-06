@@ -1,14 +1,9 @@
-// detail.js
+// detail.js (恢复到仅显示基础详情的版本)
 //
-// ⚠️ 步骤 1：替换您的 Google Sheets CSV 链接 ⚠️
-// 必须与 script.js 中的 DATA_URL 相同！
-const DATA_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQg5XACeP4fxy0ZY6fASBb6QJeiv9MFVL3GPzryhok_roTGzo4xlZclsiVDNkoRp3TNlZK8nXEo_jbL/pub?output=csv'; 
+// ⚠️ 替换您的 Google Sheets CSV 链接 ⚠️
+const DATA_URL = '您的 Google Sheets CSV 链接'; 
 
-// ⚠️ 步骤 2：替换您的 Formspree 提交链接 ⚠️
-// 例如: 'https://formspree.io/f/xbjnqer'
-const FORM_ACTION_URL = 'YOUR_FORMSPREE_ENDPOINT_HERE'; 
-
-// ---------------------- CSV 解析函数 ----------------------
+// ---------------------- CSV 解析函数 (确保独立运行) ----------------------
 function parseCSV(csvText) {
     const lines = csvText.trim().split('\n');
     const headers = lines[0].split(',').map(header => header.trim()); 
@@ -27,7 +22,7 @@ function parseCSV(csvText) {
     return services;
 }
 
-// ---------------------- 详情内容渲染函数 (包含表单) ----------------------
+// ---------------------- 详情内容渲染函数 ----------------------
 function displayServiceDetail(service) {
     const container = document.getElementById('detail-container');
     document.getElementById('page-title').textContent = `${service.title} | 易找服务平台`;
@@ -37,37 +32,19 @@ function displayServiceDetail(service) {
             <h2>${service.title}</h2>
             <p style="font-size: 1.2em; color: #555;">${service.description}</p>
             
-            <hr style="margin: 30px 0; border: 0; border-top: 1px solid #eee;">
+            <hr style="margin: 30px 0; border: 0; border-top: 1px solid #ccc;">
             
-            <h3>⭐ 立即发布需求，快速获取服务人员 ⭐</h3>
-            <p style="color: #0056b3; font-weight: bold;">
-                只需填写以下三个基本信息，我们将快速为您匹配 <strong>${service.title}</strong> 的服务人员！
+            <h3>服务提供者联系方式 (联系平台)</h3>
+            <p style="color: #dc3545; font-weight: bold;">
+                注意：请通过下方的平台客服联系方式获取服务人员的详细信息。
             </p>
 
-            <form action="${FORM_ACTION_URL}" method="POST" class="request-form">
-                
-                <input type="hidden" name="Service-Title" value="${service.title}">
-                <input type="hidden" name="_subject" value="【新需求】需要 ${service.title} 服务">
-                
-                <div class="form-group">
-                    <label for="name">您的姓名:</label>
-                    <input type="text" id="name" name="Name" required>
-                </div>
-                
-                <div class="form-group">
-                    <label for="phone">联络电话:</label>
-                    <input type="tel" id="phone" name="Phone" required>
-                </div>
-                
-                <div class="form-group">
-                    <label for="details">需求详情 (例如：地址，时间):</label>
-                    <textarea id="details" name="Details" rows="4" required></textarea>
-                </div>
-                
-                <button type="submit" class="btn submit-btn">提交需求，平台立即联络我</button>
-            </form>
+            <div style="background-color: #f0f8ff; padding: 25px; border-radius: 8px; margin-top: 20px;">
+                <p style="font-size: 1.1em; margin-bottom: 10px;">📞 平台联络电话: <strong>(123) 456-7890</strong></p>
+                <p style="font-size: 1.1em;">📧 平台联络邮箱: <strong>service@example.com</strong></p>
+            </div>
             
-            <a href="index.html" class="btn" style="background-color: #007bff; margin-top: 40px; width: 100%;">返回所有服务</a>
+            <a href="index.html" class="btn" style="background-color: #007bff; margin-top: 30px;">返回所有服务</a>
         </div>
     `;
 }
@@ -99,7 +76,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const service = services.find(s => s.id === serviceId);
 
             if (service) {
-                // 4. 动态显示详情 (包含表单)
+                // 4. 动态显示详情
                 displayServiceDetail(service);
             } else {
                 container.innerHTML = `<h2 style="color: red;">抱歉，找不到ID为 "${serviceId}" 的服务。</h2>`;
