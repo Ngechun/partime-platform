@@ -72,8 +72,8 @@ main {
     /* ... grid-template-columns 保持不变 ... */
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     
-    /* ⭐⭐ 关键修改：只调整这个值，增大卡片之间的水平和垂直间距 ⭐⭐ */
-    gap: 40px; 
+    /* ⭐⭐ 再次增大 gap 值，确保间距明显 ⭐⭐ */
+    gap: 50px; 
     
     margin-top: 20px;
 }
@@ -155,4 +155,5 @@ main {
     border-color: #ff6600; 
     outline: none;
 }
+
 
