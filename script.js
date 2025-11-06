@@ -106,3 +106,49 @@ function filterServices() {
 document.addEventListener('DOMContentLoaded', loadAndRenderServices);
 searchInput.addEventListener('input', filterServices); // 实时过滤
 
+/* ---------------------------------------------------- */
+/* 7. 需求表单样式 (Request Form Styles) */
+/* ---------------------------------------------------- */
+
+.request-form {
+    background-color: #f7f7f7;
+    padding: 25px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.request-form label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 8px;
+    color: #333;
+    font-size: 1.1em;
+}
+
+.request-form input[type="text"],
+.request-form input[type="tel"],
+.request-form textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box; /* 确保 padding 不增加总宽度 */
+    font-size: 1em;
+}
+
+.request-form textarea {
+    resize: vertical; /* 允许用户垂直拖动改变大小 */
+}
+
+.submit-btn {
+    width: 100%;
+    font-size: 1.3em;
+    padding: 15px;
+    margin-top: 10px;
+}
