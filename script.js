@@ -1,91 +1,122 @@
-// detail.js
-//
-// ⚠️ 步骤 1：替换您的 Google Sheets CSV 链接 ⚠️
-// 必须与 script.js 中的 DATA_URL 相同！
-const DATA_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQg5XACeP4fxy0ZY6fASBb6QJeiv9MFVL3GPzryhok_roTGzo4xlZclsiVDNkoRp3TNlZK8nXEo_jbL/pub?output=csv'; 
+/**
+ * 网站数据加载、卡片生成及搜索筛选逻辑 (script.js)
+ */
 
-// ---------------------- CSV 解析函数 (确保独立运行) ----------------------
-function parseCSV(csvText) {
-    const lines = csvText.trim().split('\n');
-    const headers = lines[0].split(',').map(header => header.trim()); 
-    const services = [];
+// ⚠️⚠️ 步骤 1: 替换您的 Google Sheets CSV 链接 ⚠️⚠️
+// 您的链接似乎是正确的，但请再次确认您粘贴到这里的链接是您最新发布的 CSV 链接。
+const DATA_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQg5XACeP4fxy0ZY6fASBb6QJeiv9MFVL3GPzryhok_roTGzo4xlZclsiVDNkoRp3TNlZK8nXEo_jbL/pub?output=csv';
+// ----------------------------------------------------
 
-    for (let i = 1; i < lines.length; i++) {
-        const data = lines[i].split(',');
-        if (data.length === headers.length && data.some(item => item.trim() !== '')) { 
-            const service = {};
-            for (let j = 0; j < headers.length; j++) {
-                service[headers[j]] = data[j].trim();
-            }
-            services.push(service);
-        }
-    }
-    return services;
-}
+// ----------------------------------------------------
+// 1. 获取重要元素 (现在被移到 DOMContentLoaded 内部)
+// ----------------------------------------------------
+let searchInput; 
+let servicesContainer; 
+let servicesData = []; 
 
-// ---------------------- 详情内容渲染函数 ----------------------
-function displayServiceDetail(service) {
-    const container = document.getElementById('detail-container');
-    document.getElementById('page-title').textContent = `${service.title} | 易找服务平台`;
+// ----------------------------------------------------
+// 2. 核心函数：生成单个服务卡片的 HTML 结构
+// ----------------------------------------------------
+function createCardHtml(service) {
+    // service.id 是我们现在需要使用的唯一标识符
+    const detailUrl = `detail.html?id=${service.id}`;
     
-    container.innerHTML = `
-        <div class="detail-content">
-            <h2>${service.title}</h2>
-            <p style="font-size: 1.2em; color: #555;">${service.description}</p>
-            
-            <hr style="margin: 30px 0; border: 0; border-top: 1px solid #ccc;">
-            
-            <h3>服务提供者联系方式 (联系平台)</h3>
-            <p style="color: #dc3545; font-weight: bold;">
-                注意：为了保护隐私，请通过下方的平台客服联系方式获取服务人员的详细信息。
-            </p>
-
-            <div style="background-color: #f0f8ff; padding: 25px; border-radius: 8px; margin-top: 20px;">
-                <p style="font-size: 1.1em; margin-bottom: 10px;">📞 平台联络电话: <strong>(123) 456-7890</strong></p>
-                <p style="font-size: 1.1em;">📧 平台联络邮箱: <strong>service@example.com</strong></p>
-            </div>
-            
-            <a href="index.html" class="btn" style="background-color: #007bff; margin-top: 30px;">返回所有服务</a>
+    return `
+        <div class="service-card">
+            <h3>${service.title}</h3>
+            <p>${service.description}</p>
+            <a href="${detailUrl}" class="btn">查看服务人员</a>
         </div>
     `;
 }
 
-// ---------------------- 详情页主要逻辑 ----------------------
-document.addEventListener('DOMContentLoaded', () => {
-    // 1. 从 URL 中获取服务的 ID
-    const urlParams = new URLSearchParams(window.location.search);
-    const serviceId = urlParams.get('id');
-    const container = document.getElementById('detail-container');
+// ----------------------------------------------------
+// 3. 渲染函数：根据当前数据和搜索词，更新页面内容
+// ----------------------------------------------------
+function renderServices() {
+    const searchTerm = searchInput.value.toLowerCase().trim();
+    let htmlContent = '';
+    
+    servicesData.forEach(service => {
+        const cardText = (service.title + ' ' + service.description).toLowerCase();
+        
+        if (searchTerm === '' || cardText.includes(searchTerm)) {
+            htmlContent += createCardHtml(service);
+        }
+    });
 
-    if (!serviceId) {
-        container.innerHTML = '<h2 style="color: red;">错误：未指定服务ID。</h2>';
-        return;
+    servicesContainer.innerHTML = htmlContent;
+    
+    if (htmlContent === '' && servicesData.length > 0) {
+        servicesContainer.innerHTML = '<p style="grid-column: 1 / -1; font-size: 1.5em; text-align: center; color: #cc5500;">抱歉，没有找到匹配的服务。请尝试其他关键字。</p>';
     }
+}
 
-    // 2. 加载数据
-    fetch(DATA_URL)
-        .then(response => {
-            if (!response.ok) {
-                throw new Error(`网络错误: ${response.status}`);
-            }
-            return response.text();
-        })
-        .then(csvText => {
-            const services = parseCSV(csvText);
-            
-            // 3. 查找匹配的服务
-            const service = services.find(s => s.id === serviceId);
+// ----------------------------------------------------
+// 4. 数据加载函数：从 Google Sheets 读取 CSV 数据
+// ----------------------------------------------------
+async function loadServices() {
+    try {
+        // 在加载数据前显示加载提示
+        servicesContainer.innerHTML = '<p style="grid-column: 1 / -1; font-size: 1.2em; text-align: center;">正在加载服务列表...</p>';
 
-            if (service) {
-                // 4. 动态显示详情
-                displayServiceDetail(service);
-            } else {
-                container.innerHTML = `<h2 style="color: red;">抱歉，找不到ID为 "${serviceId}" 的服务。</h2>`;
+        const response = await fetch(DATA_URL);
+        if (!response.ok) {
+             throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const csvText = await response.text();
+        
+        servicesData = parseCSV(csvText); 
+        
+        renderServices();
+        
+        searchInput.addEventListener('input', renderServices);
+
+    } catch (error) {
+        console.error('Error loading service data:', error);
+        // 如果加载失败，显示错误提示
+        servicesContainer.innerHTML = '<p style="grid-column: 1 / -1; font-size: 1.2em; text-align: center; color: red;">抱歉，服务数据加载失败，请检查您的网络和 Google Sheets 链接。</p>';
+    }
+}
+
+// ----------------------------------------------------
+// 5. CSV 解析辅助函数
+// ----------------------------------------------------
+function parseCSV(csv) {
+    const lines = csv.split('\n').filter(line => line.trim() !== '');
+    if (lines.length === 0) return [];
+
+    const headers = lines[0].split(',').map(header => header.trim().toLowerCase());
+    
+    const result = [];
+    for (let i = 1; i < lines.length; i++) {
+        const values = lines[i].split(',');
+        const service = {};
+        
+        if (values.length === headers.length) {
+            for (let j = 0; j < headers.length; j++) {
+                service[headers[j]] = (values[j] || '').trim().replace(/\r/g, ''); 
             }
-        })
-        .catch(error => {
-            console.error('加载详情数据失败:', error);
-            container.innerHTML = '<h2 style="color: red;">抱歉，服务详情加载失败。请检查您的 Google Sheets 链接。</h2>';
-        });
+        }
+        
+        if (service.title) {
+            result.push(service);
+        }
+    }
+    return result;
+}
+
+// ----------------------------------------------------
+// 6. 网站启动！(保证DOM元素加载完毕)
+// ----------------------------------------------------
+document.addEventListener('DOMContentLoaded', () => {
+    // 只有在 DOM 加载完毕后，我们才能安全地获取元素
+    searchInput = document.getElementById('service-search'); 
+    servicesContainer = document.getElementById('services-container'); 
+    
+    if (servicesContainer) {
+        loadServices();
+    } else {
+        console.error("Critical Error: 'services-container' element not found in index.html");
+    }
 });
-
