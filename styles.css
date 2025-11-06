@@ -69,9 +69,10 @@ main {
 
 .service-list {
     display: grid;
+    /* ... grid-template-columns 保持不变 ... */
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     
-    /* ⭐⭐ 修复垂直粘连问题：增大 grid 间距 ⭐⭐ */
+    /* ⭐⭐ 关键修改：只调整这个值，增大卡片之间的水平和垂直间距 ⭐⭐ */
     gap: 40px; 
     
     margin-top: 20px;
@@ -154,3 +155,4 @@ main {
     border-color: #ff6600; 
     outline: none;
 }
+
