@@ -1,5 +1,5 @@
 /*
- * 完整的 styles.css 文件 (恢复到基础版本，并修复了间距和语法错误)
+ * 完整的 styles.css 文件 (修复了间距和对齐问题)
  */
 
 /* ---------------------------------------------------- */
@@ -53,7 +53,7 @@ footer {
     color: #fff;
     text-align: center;
     padding: 20px 0;
-    margin-top: 40px; /* 增加底部间距 */
+    margin-top: 40px; 
     font-size: 1em;
 }
 
@@ -64,15 +64,14 @@ main {
     padding: 20px;
     max-width: 1200px;
     margin: 0 auto; 
-    padding-bottom: 50px; /* 确保主内容区与底部有足够空间 */
+    padding-bottom: 50px; 
 }
 
 .service-list {
     display: grid;
-    /* ... grid-template-columns 保持不变 ... */
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     
-    /* ⭐⭐ 再次增大 gap 值，确保间距明显 ⭐⭐ */
+    /* 修复垂直粘连问题：增大 grid 间距 */
     gap: 50px; 
     
     margin-top: 20px;
@@ -86,7 +85,7 @@ main {
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
     transition: transform 0.2s;
     
-    /* ⭐ 按钮底部对齐的关键代码 ⭐ */
+    /* 按钮底部对齐的关键代码 */
     display: flex;
     flex-direction: column;
     height: 100%;
@@ -97,9 +96,8 @@ main {
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
 }
 
-/* ⭐ 按钮底部对齐的关键代码：让描述文字占据所有剩余空间 ⭐ */
 .service-card p {
-    flex-grow: 1; 
+    flex-grow: 1; /* 强制 P 标签占据所有垂直可用空间 */
     margin-bottom: 15px;
     font-size: 1.1em;
 }
@@ -134,7 +132,6 @@ main {
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 } 
-/* <-- 确保这里有正确的右大括号 }，这是之前语法错误可能发生的地方 */
 
 .search-container h3 {
     margin-top: 0;
@@ -155,4 +152,3 @@ main {
     border-color: #ff6600; 
     outline: none;
 }
-
