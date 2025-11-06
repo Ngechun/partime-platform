@@ -1,5 +1,5 @@
 /*
- * 完整的 styles.css 文件
+ * 完整的 styles.css 文件 (包含按钮底部对齐修正)
  * 目标: 对老年用户友好的大字体、高对比度和清晰布局。
  */
 
@@ -82,11 +82,22 @@ main {
     padding: 25px;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1); /* 突出卡片 */
     transition: transform 0.2s; /* 鼠标悬停动画 */
+    
+    /* ⭐⭐ 修正按钮不对齐的关键代码 ⭐⭐ */
+    display: flex; /* 启用弹性布局 */
+    flex-direction: column; /* 垂直堆叠内容 */
+    height: 100%; /* 确保在网格布局中卡片高度相同 */
 }
 
 .service-card:hover {
     transform: translateY(-5px); /* 鼠标移上去时微微上浮，增加互动感 */
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* ⭐⭐ 修正按钮不对齐的关键代码：让描述文字占据所有剩余空间 ⭐⭐ */
+.service-card p {
+    flex-grow: 1; /* 强制 P 标签占据所有垂直可用空间 */
+    margin-bottom: 15px; /* 段落文字也稍大 */
 }
 
 /* ---------------------------------------------------- */
