@@ -1,7 +1,7 @@
 // script.js
 // 
 // ⚠️ 步骤 1：替换您的 Google Sheets CSV 链接 ⚠️
-const DATA_URL = '您的 Google Sheets CSV 链接'; 
+const DATA_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQg5XACeP4fxy0ZY6fASBb6QJeiv9MFVL3GPzryhok_roTGzo4xlZclsiVDNkoRp3TNlZK8nXEo_jbL/pub?output=csv'; 
 
 // ---------------------- 1. 获取重要元素 ----------------------
 const searchInput = document.getElementById('service-search');
@@ -105,3 +105,4 @@ function filterServices() {
 // ---------------------- 6. 初始化 ----------------------
 document.addEventListener('DOMContentLoaded', loadAndRenderServices);
 searchInput.addEventListener('input', filterServices); // 实时过滤
+
