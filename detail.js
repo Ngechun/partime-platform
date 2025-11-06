@@ -33,23 +33,27 @@ function displayServiceDetail(service) {
             <h2>${service.title}</h2>
             <p style="font-size: 1.2em; color: #555;">${service.description}</p>
             
-            <hr style="margin: 30px 0; border: 0; border-top: 1px solid #ccc;">
+            <hr style="margin: 30px 0; border: 0; border-top: 1px solid #eee;">
             
-            <h3>服务提供者联系方式 (联系平台)</h3>
+            <h3>服务提供者联系方式</h3>
             <p style="color: #dc3545; font-weight: bold;">
-                注意：为了保护隐私，请通过下方的平台客服联系方式获取服务人员的详细信息。
+                您正在查询的服务是 **${service.title}**。
+                为了保障服务人员和客户的隐私安全，您需要通过平台客服获取联系方式。
             </p>
 
-            <div style="background-color: #f0f8ff; padding: 25px; border-radius: 8px; margin-top: 20px;">
-                <p style="font-size: 1.1em; margin-bottom: 10px;">📞 平台联络电话: <strong>(123) 456-7890</strong></p>
-                <p style="font-size: 1.1em;">📧 平台联络邮箱: <strong>service@example.com</strong></p>
+            <div class="contact-info-block">
+                <p style="font-size: 1.1em; margin-bottom: 10px;">
+                    📞 平台联络电话: <strong>(123) 456-7890</strong>
+                </p>
+                <p style="font-size: 1.1em;">
+                    📧 平台联络邮箱: <strong>service@example.com</strong>
+                </p>
             </div>
             
-            <a href="index.html" class="btn" style="background-color: #007bff; margin-top: 30px;">返回所有服务</a>
+            <a href="index.html" class="btn" style="background-color: #007bff; margin-top: 40px;">返回所有服务</a>
         </div>
     `;
 }
-
 // ---------------------- 详情页主要逻辑 ----------------------
 document.addEventListener('DOMContentLoaded', () => {
     // 1. 从 URL 中获取服务的 ID
@@ -88,3 +92,4 @@ document.addEventListener('DOMContentLoaded', () => {
             container.innerHTML = '<h2 style="color: red;">抱歉，服务详情加载失败。请检查您的 Google Sheets 链接。</h2>';
         });
 });
+
