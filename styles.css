@@ -1,52 +1,51 @@
 /*
- * 完整的 styles.css 文件 (包含按钮底部对齐修正)
- * 目标: 对老年用户友好的大字体、高对比度和清晰布局。
+ * 完整的 styles.css 文件 (恢复到基础版本，并修复了间距和语法错误)
  */
 
 /* ---------------------------------------------------- */
 /* 1. 全局设置：确保字体大且易读 */
 /* ---------------------------------------------------- */
 body {
-    font-family: 'Arial', sans-serif; /* 使用清晰的字体 */
-    line-height: 1.6; /* 增加行高，提升阅读舒适度 */
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
     margin: 0;
     padding: 0;
-    background-color: #f4f4f9; /* 柔和的背景色 */
-    color: #333; /* 主要文字颜色，高对比度 */
-    font-size: 18px; /* 基础字体增大 */
+    background-color: #f4f4f9;
+    color: #333;
+    font-size: 18px;
 }
 
 h1 {
-    font-size: 3em; /* 标题非常大，醒目 */
-    color: #0056b3; /* 品牌主色调 */
+    font-size: 3em;
+    color: #0056b3;
     margin-bottom: 0.5em;
 }
 
 h2 {
     font-size: 2.2em;
     color: #007bff;
-    border-bottom: 3px solid #007bff; /* 分隔线让标题更清晰 */
+    border-bottom: 3px solid #007bff;
     padding-bottom: 0.3em;
     margin-top: 1.5em;
 }
 
 h3 {
-    font-size: 1.6em; /* 服务卡片标题 */
-    color: #28a745; /* 强调绿色 */
+    font-size: 1.6em;
+    color: #28a745;
 }
 
 p {
-    font-size: 1.1em; /* 段落文字也稍大 */
+    font-size: 1.1em;
 }
 
 /* ---------------------------------------------------- */
 /* 2. 头部和底部样式 */
 /* ---------------------------------------------------- */
 header {
-    background-color: #ffffff; /* 白色背景 */
+    background-color: #ffffff;
     padding: 30px 20px;
     text-align: center;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* 增加阴影，更有层次感 */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 footer {
@@ -54,7 +53,7 @@ footer {
     color: #fff;
     text-align: center;
     padding: 20px 0;
-    margin-top: 40px;
+    margin-top: 40px; /* 增加底部间距 */
     font-size: 1em;
 }
 
@@ -63,41 +62,46 @@ footer {
 /* ---------------------------------------------------- */
 main {
     padding: 20px;
-    max-width: 1200px; /* 限制最大宽度，避免内容太宽不好阅读 */
-    margin: 0 auto; /* 居中显示 */
+    max-width: 1200px;
+    margin: 0 auto; 
+    padding-bottom: 50px; /* 确保主内容区与底部有足够空间 */
 }
 
 .service-list {
     display: grid;
-    /* 在宽屏幕上显示两列，窄屏幕上显示一列 */
+    /* ... grid-template-columns 保持不变 ... */
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 30px; /* 卡片之间的间距 */
+    
+    /* ⭐⭐ 再次增大 gap 值，确保间距明显 ⭐⭐ */
+    gap: 50px; 
+    
     margin-top: 20px;
 }
 
 .service-card {
     background-color: #fff;
     border: 1px solid #ddd;
-    border-radius: 12px; /* 圆角设计 */
+    border-radius: 12px;
     padding: 25px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1); /* 突出卡片 */
-    transition: transform 0.2s; /* 鼠标悬停动画 */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s;
     
-    /* ⭐⭐ 修正按钮不对齐的关键代码 ⭐⭐ */
-    display: flex; /* 启用弹性布局 */
-    flex-direction: column; /* 垂直堆叠内容 */
-    height: 100%; /* 确保在网格布局中卡片高度相同 */
+    /* ⭐ 按钮底部对齐的关键代码 ⭐ */
+    display: flex;
+    flex-direction: column;
+    height: 100%;
 }
 
 .service-card:hover {
-    transform: translateY(-5px); /* 鼠标移上去时微微上浮，增加互动感 */
+    transform: translateY(-5px);
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
 }
 
-/* ⭐⭐ 修正按钮不对齐的关键代码：让描述文字占据所有剩余空间 ⭐⭐ */
+/* ⭐ 按钮底部对齐的关键代码：让描述文字占据所有剩余空间 ⭐ */
 .service-card p {
-    flex-grow: 1; /* 强制 P 标签占据所有垂直可用空间 */
-    margin-bottom: 15px; /* 段落文字也稍大 */
+    flex-grow: 1; 
+    margin-bottom: 15px;
+    font-size: 1.1em;
 }
 
 /* ---------------------------------------------------- */
@@ -105,19 +109,19 @@ main {
 /* ---------------------------------------------------- */
 .btn {
     display: inline-block;
-    background-color: #ff6600; /* 醒目的橙色按钮 */
+    background-color: #ff6600;
     color: #fff;
     padding: 12px 20px;
-    text-decoration: none; /* 移除下划线 */
+    text-decoration: none;
     border-radius: 8px;
     margin-top: 15px;
-    font-size: 1.2em; /* 按钮文字更大 */
+    font-size: 1.2em;
     font-weight: bold;
     transition: background-color 0.2s;
 }
 
 .btn:hover {
-    background-color: #cc5500; /* 鼠标悬停时颜色变深 */
+    background-color: #cc5500;
 }
 
 /* ---------------------------------------------------- */
@@ -126,10 +130,11 @@ main {
 .search-container {
     margin: 30px 0;
     padding: 20px;
-    background-color: #e9ecef; /* 浅灰色背景突出搜索区域 */
+    background-color: #e9ecef;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-}
+} 
+/* <-- 确保这里有正确的右大括号 }，这是之前语法错误可能发生的地方 */
 
 .search-container h3 {
     margin-top: 0;
@@ -140,13 +145,14 @@ main {
 #service-search {
     width: 100%;
     padding: 15px;
-    font-size: 1.2em; /* 搜索框字体放大 */
+    font-size: 1.2em; 
     border: 2px solid #ccc;
     border-radius: 6px;
-    box-sizing: border-box; /* 确保 padding 不会使宽度超出 */
+    box-sizing: border-box; 
 }
 
 #service-search:focus {
-    border-color: #ff6600; /* 聚焦时使用醒目的颜色 */
+    border-color: #ff6600; 
     outline: none;
 }
+
